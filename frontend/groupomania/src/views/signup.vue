@@ -21,7 +21,7 @@
 <script>
 // @ is an alias to /src
 import signupC from '@/components/signup.vue'
-import loginC from '@components/login.vue'
+import loginC from '../components/login.vue'
 export default {
   name: 'signup',
   components: {
