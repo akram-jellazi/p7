@@ -27,21 +27,69 @@ class User {
 User.create = user => {
     const INSERT = [Object.keys(user), Object.values(user)]
     const query = db.format('INSERT INTO utilisateur (??) VALUES (?)',INSERT)
-    db.query(query, function (error, results, fields) {
-        if (error) throw error;
-        return results;
-      });
-}
-User.find = user => {
+    return new Promise((resolve,reject)=> {
+        db.query(query, function (error, results, fields) {
+            if (error) throw error;
+            resolve(results) ;
+    });
+})
+};
+User.findOne = user => {
     const INSERT = [Object.keys(user), Object.values(user)]
-    const query = db.format('SELECT email,nom,prenom FROM utilisateur WHERE ??=?',INSERT)
-    db.query(query, function (error, results, fields) {
-        if (error) throw error;
-        console.log(results)
-        return results[0];
-      });
+    const query = db.format('SELECT email,nom,prenom,password FROM utilisateur WHERE ??=?',INSERT)
+    return new Promise((resolve,reject)=> {
+        db.query(query, function (error, results, fields) {
+            if (error) throw error;
+            resolve(results[0]) ;
+    });
+})
 }
 
+//PUT
+// Se Modifier
+exports.modifyUserProfile = async (req, res, next) => {
+
+    let userObject = {
+        ...req.body
+    };
+
+    // Password
+    if (userObject.password) {
+        console.log("password change for user " + userId)
+        userObject.password = await bcrypt.hash(userObject.password, 10)
+    }
+    
+    //Avatar        
+    if (req.file) {
+        console.log("avatar change for user " + userId)
+        userObject.avatar = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
+    console.log(userObject);
+    
+
+    const INSERT = [userObject,res.locals.userId]
+    const query = db.format('UPDATE utilisateur SET ? WHERE id = ? ',INSERT)
+    return new Promise((resolve,reject)=> {
+        db.query(query, function (error, results, fields) {
+            if (error) throw error;
+            resolve(results[0]) ;
+        });
+    })
+}
+
+// DELETE
+// Suppression de l'user
+exports.deleteAccount = (req, res, next) => {
+    
+    const INSERT = [res.locals.userId]
+    const query = db.format('DELETE utilisateur WHERE id = ? ',INSERT)
+    return new Promise((resolve,reject)=> {
+        db.query(query, function (error, results, fields) {
+            if (error) throw error;
+            resolve(results[0]) ;
+        });
+    })
+}
 
 
 module.exports = User;

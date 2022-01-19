@@ -7,43 +7,26 @@
 
     <div class="formulaire">
     <!-- S'inscrire -->
-            <form @submit.prevent="signup" class="signup">
-                <h2 class="signup-titre">S'inscrire</h2>
-                <label for="lastName" class="signup-nom">Prénom</label>
-                <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Nom">
-                <label for="firstName" class="signup-prenom">Nom</label>
-                <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="Prenom">
-                <label for="mail" class="signup-email">Courriel</label>
-                <input type="email" v-model="signupemail" id="signupemail" name="mail" placeholder="votre_email@groupomania.com">
-                <label for="password" class="signup-mdp">Mot de passe</label>
-                <input type="password" autocomplete="current-password" v-model="signupmdp" id="signupmdp" name="password" placeholder="**********">
-                <button class="signup-bouton">Inscription</button>
-            </form>
+        <signupC/>
             <span>Ou </span>
            
     <!-- Se connecter -->
-            <form @submit.prevent="login" class="login">
-                <h2 class="login-titre">Se connecter</h2>
-                <label for="mail" class="login-email">Courriel</label>
-                <input type="email" v-model="loginemail" id="loginemail" name="mail" placeholder="votre_email@groupomania.com">
-                <label for="password" class="login-mdp">Mot de passe</label>
-                <input type="password" autocomplete="current-password" v-model="loginmdp" id="loginmdp" name="password" placeholder="**********">
-                <button class="login-bouton">Connexion</button>
-            </form>
-        </div>
 
-      <signupC/>
+        </div>
+        <loginC/>
+      
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import signupC from '@/components/signup.vue'
-
+import loginC from '@components/login.vue'
 export default {
   name: 'signup',
   components: {
-    signupC
+    signupC,
+    loginC
   }
 }
 </script>

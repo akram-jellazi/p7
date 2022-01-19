@@ -24,9 +24,9 @@ exports.signup = async (req, res, next) => {
       
 
 exports.login = (req, res, next) => {
-    let user = User.find({ email: req.body.email }) 
-    console.log(user)
-
+    let user = User.findOne({ email: req.body.email }) 
+    .then(user => {
+        console.log(user)
         if (!user) {
             return res.status(401).json({ error: 'Utilisateur non trouvé' });
         }
@@ -44,6 +44,5 @@ exports.login = (req, res, next) => {
                     )
                 });
             })
-            .catch(error => res.status(500).json({ error }));
-   
+    }) 
   };
