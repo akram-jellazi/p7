@@ -13,7 +13,8 @@
                     </div>
                     <div v-if="post.userId == userId">DEUX BOUTTONS; UPDATE et DELETE </div>
                     <!-- <div v-for="commentaire in commentaires" :key="commentaire.id" > </div> -->
-                    <Commentaire/>
+                    <!-- <Commentaire/> -->
+                    <Commentaire :post="post" :commentaires="commentaires" />
 </div>
 </template>
 
@@ -28,7 +29,7 @@
             Commentaire
         },
         
-        props: ['post','postId'],
+        props: ['post','postId','commentaire'],
         
         data(){ 
             return {
@@ -40,6 +41,7 @@
 
         },
          mounted : function () {
+              
       fetch(`http://localhost:3000/api/commentaires?postId= ${this.post.id} &sortName=CreatedAt`,
      {
               method:'GET',
@@ -48,7 +50,8 @@
                       },}) 
       .then ( res => (res.json()))
       .then (res => {
-        this.commentaire = res
+          console.log('commentaires',this.commentaires)
+        this.commentaires = res
       })
   }
     }

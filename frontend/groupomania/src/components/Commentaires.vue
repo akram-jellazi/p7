@@ -3,7 +3,7 @@
         <div v-for="commentaire in commentaires" :key="commentaire.id">
             <div class="commentaire">
                 <div class="author">
-                    <span> {{commentaire.User.nom}} {{commentaire.User.prenom}} </span>
+                    <span> {{commentaire.userId.nom}} {{commentaire.userId.prenom}} </span>
                 </div>
 
                 <div class="contenu">
