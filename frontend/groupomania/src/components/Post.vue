@@ -50,7 +50,6 @@
                       },}) 
       .then ( res => (res.json()))
       .then (res => {
-          console.log('commentaires',this.commentaires)
         this.commentaires = res
       })
   }
