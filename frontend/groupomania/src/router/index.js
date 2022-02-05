@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import signup from '../views/signup.vue'
+import WallPage from '../views/WallPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,7 +23,12 @@ const routes = [
     path:'/signup',
     name: 'signup',
     component: signup
-  }
+  },
+  {
+    path: '/wall',
+    name: 'WallPage',
+    component: WallPage
+  },
 ]
 
 const router = new VueRouter({

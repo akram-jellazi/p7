@@ -24,8 +24,11 @@ app.use((req, res, next) => {
   next();
 });
 
-const sauceRoutes = require('./routes/sauces'); // importation des routes des sauces
-app.use('/api/sauces', sauceRoutes);
+const postRoutes = require('./routes/post'); // importation des routes des sauces
+app.use('/api/post', postRoutes);
+
+const commentRoutes = require('./routes/commentaires'); // importation des routes des sauces
+app.use('/api/commentaires', commentRoutes);
 
 const path = require('path'); // acceder au path(chemin) de notre serveur
 app.use('/images', express.static(path.join(__dirname, 'images'))); 

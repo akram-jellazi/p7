@@ -4,7 +4,7 @@ const MIME_TYPES = { // dictionnaire MIME_TYPES
     'image/jpg' : 'jpg',
     'image/jpeg': 'jpg',
     'image/png': 'png',
-    // 'image/gif' : 'gif'
+    'image/gif' : 'gif'
 };
 // storage indique à multer où enregistrer les infos  
 // fonction destination indique a multer où enregistrer ds le dossier image

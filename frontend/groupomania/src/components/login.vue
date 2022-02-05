@@ -23,6 +23,9 @@
 </template>   
 
   <script>
+
+  import router from '../router';
+
 export default {
   name: "loginC",
 
@@ -36,6 +39,9 @@ export default {
    methods: {
             //Se connecter
             login() {
+
+console.log('test', this.loginemail, this.loginmdp);
+
                 fetch('http://localhost:3000/api/auth/login', {
                 method:'POST',
                 headers: {
@@ -46,13 +52,18 @@ export default {
                     password: this.loginmdp,
               })
                 })
+                .then(res => res.json())
                 .then(response => {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('userId', response.data.userId);
-                    localStorage.setItem('lastName', response.data.lastName);
+
+                    console.log(response);
+
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('userId', response.userId);
+                   /* localStorage.setItem('lastName', response.data.lastName);
                     localStorage.setItem('firstName', response.data.firstName);
-                    localStorage.setItem('avatar', response.data.avatar);
-                    this.redirect('wall')
+                    localStorage.setItem('avatar', response.data.avatar);*/
+                    
+                    router.push('/wall')
                 })
                 .catch(() => {this.messError = 'Une erreur c\'est produite'})
             }

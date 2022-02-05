@@ -16,9 +16,6 @@
 <script>
 export default {
   name: 'signupC',
-    components: {
-      signupC
-    },
 
         data() {
           return {
@@ -44,7 +41,7 @@ export default {
             })
             .then(response => {
                 localStorage.setItem('token', response.token)
-                redirect('wall')
+                window.location.href = 'wall'
             })
           }
         }
