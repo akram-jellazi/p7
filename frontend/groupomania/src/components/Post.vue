@@ -15,6 +15,7 @@
                     <!-- <div v-for="commentaire in commentaires" :key="commentaire.id" > </div> -->
                     <!-- <Commentaire/> -->
                     <Commentaire :post="post" :commentaires="commentaires" />
+                    <writingComm :post="postId" />
 </div>
 </template>
 
@@ -23,10 +24,12 @@
 <script>
     // import axios from 'axios'
     import Commentaire from '@/components/Commentaires.vue'
+    import writingComm from '@/components/WritingCommentaire.vue'
     export default {
         name: 'Post',
         components: {
-            Commentaire
+            Commentaire,
+            writingComm
         },
         
         props: ['post','postId','commentaire'],
