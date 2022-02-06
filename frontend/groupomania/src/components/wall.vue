@@ -12,6 +12,7 @@ export default {
     components: {
     Post
   },
+  props: ['postId'],
   data() {
     return {
       Posts: [],

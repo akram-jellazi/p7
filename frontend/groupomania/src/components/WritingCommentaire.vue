@@ -27,7 +27,7 @@
         methods: {
             // créer commentaire
             createCommentaires() {
-                axios.post('http://localhost:3000/api/commentaires', {
+                axios.post('http://localhost:3000/api/commentaires', { 
                     postId : this.postId,
                     text: this.text
                 }, {
@@ -37,7 +37,7 @@
                 })
                 console.log('postId',this.postId)       //CONSOLE LOG  // 
                 console.log('text',this.text)            //CONSOLE LOG   //     
-                .then(() => {window.location.reload()})
+                // .then(() => {window.location.reload()})
 
                 .catch(() => {this.messError = 'Une erreur c\'est produite'})
             },

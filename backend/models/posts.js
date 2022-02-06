@@ -40,7 +40,6 @@ Posts.findAll = payload => {
     return new Promise((resolve,reject)=> {
         db.query(query, function (error, posts, fields) {
             if (error) throw error;
-            console.log('post',posts)
             resolve(posts) ;
 
     });
