@@ -2,7 +2,7 @@
     <div class="writingComm">
         <form>
             <textarea v-model="text"  class="" name="message" id="message" placeholder="Exprimez vous"/>
-            <button v-on:click="createCommentaires" type="submit" >Publier</button>
+            <button v-on:click="createCommentaires" type="submit" v-bind="postId" >Publier</button>
         </form>
 
         <span>{{messError}}</span>

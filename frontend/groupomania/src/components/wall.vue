@@ -2,7 +2,7 @@
   <div>
 
     <div v-for="post in Posts" :key="post.id">
-      <Post :post="post"  />
+      <Post :post="post"/>
     </div>
   </div>
 </template>
@@ -11,8 +11,8 @@ import Post from '@/components/Post.vue'
 export default {
     components: {
     Post
+    
   },
-  props: ['postId'],
   data() {
     return {
       Posts: [],

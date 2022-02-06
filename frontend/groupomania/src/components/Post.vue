@@ -36,7 +36,7 @@
                     </div>    -->
                     <!--test -->
                     <Commentaire :post="post" :commentaires="commentaires" />
-                    <writingComm :commentaire="post.id" />
+                    <writingComm :postId="post.id" />
 </div>
 </template>
 
@@ -62,20 +62,6 @@
             }
         },
         methods: {
-            // Modifier un Post
-//              onFileSelected(event) {
-//                 this.imageURL = event.target.files[0];
-//                 this.imagePreview = URL.createObjectURL(this.imageURL);
-//             }, 
-            
-//             modifPost(post) {    
-//                 const formData = new FormData();                
-//                 formData.append("userId", this.userId);
-//                 formData.append("text", post.text);
-//                 formData.append("image", this.imageURL);
-
-//             },
-//             modifyPost() {
               
 //       fetch(`http://localhost:3000/api/post/`,{
 //           postId : this.postId,
