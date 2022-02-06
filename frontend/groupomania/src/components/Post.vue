@@ -15,7 +15,7 @@
                     <!-- <div v-for="commentaire in commentaires" :key="commentaire.id" > </div> -->
                     <!-- <Commentaire/> -->
                     <Commentaire :post="post" :commentaires="commentaires" />
-                    <writingComm :post="postId" />
+                    <writingComm :commentaire="postId" />
 </div>
 </template>
 

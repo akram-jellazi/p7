@@ -1,8 +1,8 @@
 <template>
     <div class="writingComm">
         <form>
-            <textarea v-model="text" class="" name="message" id="message" placeholder="Exprimez vous"/>
-            <button v-on:click="createCommentaire" type="submit">Publier</button>
+            <textarea v-model="text"  class="" name="message" id="message" placeholder="Exprimez vous"/>
+            <button v-on:click="createCommentaires" type="submit" >Publier</button>
         </form>
 
         <span>{{messError}}</span>
@@ -26,15 +26,19 @@
         },
         methods: {
             // créer commentaire
-            createCommentaire() {
-                axios.post('http://localhost:3000/api/commentaire/' + this.postId, {
+            createCommentaires() {
+                axios.post('http://localhost:3000/api/commentaires', {
+                    postId : this.postId,
                     text: this.text
                 }, {
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 })
+                console.log('postId',this.postId)       //CONSOLE LOG  // 
+                console.log('text',this.text)            //CONSOLE LOG   //     
                 .then(() => {window.location.reload()})
+
                 .catch(() => {this.messError = 'Une erreur c\'est produite'})
             },
         }
