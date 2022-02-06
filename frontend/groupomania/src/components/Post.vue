@@ -12,8 +12,8 @@
                         <img :src="post.imageURL" style="max-width: 100%" />
                     </div> -->
                      <div v-if="post.userId == userId">
-                        <button>UPDATE </button>
-                        <button>DELETE </button>
+                        <!-- <button>UPDATE </button>
+                        <button>DELETE </button> -->
                     </div>
 
                     <!-- test -->
@@ -30,10 +30,10 @@
                     </form>
                     </div> -->
                     <!-- Bouttons  -->
-                      <!-- <div class="author-boutons">
+                      <div class="author-boutons">
                         <button v-if="userId == post.userId" v-on:click="modifPostBouton('modifSection-' + post.id)">Modifier</button>
-                        <button v-if="userId == post.userId || statut == 'admin'" v-on:click="deletePost(post.id)">Supprimer</button>
-                    </div>    -->
+                        <button v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
+                    </div>   
                     <!--test -->
                     <Commentaire :post="post" :commentaires="commentaires" />
                     <writingComm :postId="post.id" />
@@ -58,25 +58,52 @@
         data(){ 
             return {
                 userId: localStorage.getItem('userId'),
+                status: localStorage.getItem('status'),
                 commentaires : [],
             }
         },
         methods: {
-              
-//       fetch(`http://localhost:3000/api/post/`,{
-//           postId : this.postId,
-//           text : this.text
-//       },
-//      {
-//               method:'PUT',
-//               headers: {
-//                   'Authorization': 'bearer '+ localStorage.getItem('token')
-//                       },}) 
-//       .then ( res => (res.json()))
-//       .then (res => {
-//         this.commentaires = res
-//       })
-//   }
+         onFileSelected(event) {
+                this.imageURL = event.target.files[0];
+                this.imagePreview = URL.createObjectURL(this.imageURL);
+            }, 
+            
+            modifPost(post) {    
+                const formData = new FormData();                
+                formData.append("userId", this.userId);
+                formData.append("text", post.text);
+                formData.append("image", this.imageURL);
+
+        fetch(`http://localhost:3000/api/post/`,{
+                postId : this.postId,
+                text : this.text
+            },
+            {
+                    method:'PUT',
+                    headers: {
+                        'Authorization': 'bearer '+ localStorage.getItem('token')
+                            },}) 
+            .then ( res => (res.json()))
+            .then (res => {
+                this.commentaires = res
+            })
+        },
+         //bouton
+			modifPostBouton(postModifSection){
+				// this.voirModifPost = !this.voirModifPost
+                if (this.modifId == postModifSection) {
+                    this.modifId = ''
+                } else {
+                    this.modifId = postModifSection
+                }
+            },            
+            repondre(replyFormId) {
+                this.replyFormId = replyFormId
+            },
+            applyFilter(filter) {
+                this.filter = filter
+            },
+
         },
          mounted : function () {
               
