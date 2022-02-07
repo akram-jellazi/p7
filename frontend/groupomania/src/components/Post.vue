@@ -7,17 +7,17 @@
                         <span> {{post.nom}} {{post.prenom}} </span>
                     </div>
 
-                    <div  class="contenu">
+                    <!-- <div  class="contenu">
                         <p>{{post.text}}</p>
                         <img :src="post.imageURL" style="max-width: 100%" />
+                    </div>  -->
+                     <!-- <div v-if="post.userId == userId">
+                        <button>UPDATE </button>
+                        <button>DELETE </button>
                     </div> -->
-                     <div v-if="post.userId == userId">
-                        <!-- <button>UPDATE </button>
-                        <button>DELETE </button> -->
-                    </div>
 
                     <!-- test -->
-                    <!-- <div v-if="modifId != 'modifSection-' + post.id" class="contenu">
+                    <div v-if="modifId != 'modifSection-' + post.id" class="contenu">
                         <p>{{post.text}}</p>
                         <img :src="post.imageURL" style="max-width: 100%" />
                     </div>
@@ -28,9 +28,9 @@
                         <input type="file" @change="onFileSelected" accept="image/*">       
                         <button type="submit">Publier</button>
                     </form>
-                    </div> -->
+                    </div> 
                     <!-- Bouttons  -->
-                      <div class="author-boutons">
+                      <div v-if=" modifId != 'modifSection-'" class="author-boutons"  >
                         <button v-if="userId == post.userId" v-on:click="modifPostBouton('modifSection-' + post.id)">Modifier</button>
                         <button v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
                     </div>   
@@ -60,6 +60,17 @@
                 userId: localStorage.getItem('userId'),
                 status: localStorage.getItem('status'),
                 commentaires : [],
+                user: {},
+                posts: [],
+                imageURL: '',
+                imagePreview:'',
+                 //bouton
+                boutonVoir: false,
+                filter: 'all',
+                replyFormId: '',
+                commentSectionId: '',
+                likeFormId: '',
+                modifId: '',
             }
         },
         methods: {
@@ -73,11 +84,9 @@
                 formData.append("userId", this.userId);
                 formData.append("text", post.text);
                 formData.append("image", this.imageURL);
+                formData.append("positId",this.postId);
 
-        fetch(`http://localhost:3000/api/post/`,{
-                postId : this.postId,
-                text : this.text
-            },
+        fetch(`http://localhost:3000/api/post/`,formData,
             {
                     method:'PUT',
                     headers: {
@@ -90,7 +99,7 @@
         },
          //bouton
 			modifPostBouton(postModifSection){
-				// this.voirModifPost = !this.voirModifPost
+				
                 if (this.modifId == postModifSection) {
                     this.modifId = ''
                 } else {
