@@ -123,7 +123,7 @@
                 this.replyFormId = replyFormId
             },
             applyFilter(filter) {
-                this.filter = filter
+                this.filter = filter    
             },
 
         },

@@ -2,7 +2,7 @@
     <div>
         <div v-for="commentaire in commentaires" :key="commentaire.id">
             <div class="commentaire">
-                <div class="author">
+                <div class="author"  v-if="userId == commentaire.userId">
                     <span> {{commentaire.userId.nom}} {{commentaire.userId.prenom}} </span>
                 </div>
 
@@ -40,7 +40,8 @@
         },
         methods: {
             // supprimer un commentaire
-            deleteCommentaires(commentId) {                
+            deleteCommentaires(commentId) {    
+                console.log('commentaire',this.commentaire)      
                 axios.delete('http://localhost:3000/api/commentaires/' + commentId, {
                     headers: {
                         'Content-Type' : 'application/json',
