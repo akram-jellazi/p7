@@ -25,7 +25,7 @@
                     <form :postId="post.id" v-if="modifId == 'modifSection-' + post.id" v-on:submit.prevent="modifyPost(post)">
                         <textarea v-model="post.text" class="" name="message" id="message"/>    
                         <img v-if="imagePreview" :src="imagePreview" id="preview" class=""/>     
-                        <input type="file" @change="onFileSelected" accept="image/*">       
+                        <input type="file" @change="onFileSelected" accept="images/*">       
                         <button type="submit">Publier</button>
                     </form>
                     </div> 
@@ -43,7 +43,7 @@
 
 
 <script>
-    // import axios from 'axios'
+    import axios from 'axios'
     import Commentaire from '@/components/Commentaires.vue'
     import writingComm from '@/components/WritingCommentaire.vue'
     export default {
@@ -73,13 +73,14 @@
                 modifId: '',
             }
         },
+        // modifier le post
         methods: {
          onFileSelected(event) {
                 this.imageURL = event.target.files[0];
                 this.imagePreview = URL.createObjectURL(this.imageURL);
             }, 
             
-            modifPost(post) {    
+            modifyPost(post) {    
                 const formData = new FormData();                
                 formData.append("userId", this.userId);
                 formData.append("text", post.text);
@@ -97,6 +98,18 @@
                 this.commentaires = res
             })
         },
+        // supprimer post
+            deletePost(id) {
+                const postId = id;
+                axios.delete('http://localhost:3000/api/post/' + postId, {
+                    headers: {
+                        'Content-Type' : 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                .then(() => {window.location.reload()})
+                .catch(() => {this.messError = 'Une erreur s\'est produite'})
+            },
          //bouton
 			modifPostBouton(postModifSection){
 				
