@@ -27,7 +27,6 @@
                 </div>
                 <div class="bouton">
                     <div class="boutonRow" v-if="!voirSupprimer">
-                        <button v-on:click="togglewModifierElement">Modifier</button>
                         <button v-on:click="boutonSupprimer">Supprimer</button>
                     </div>        
                     <div v-if="voirSupprimer">
@@ -66,6 +65,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
 	import axios from 'axios'
 	export default {
 		name: 'Profil',
@@ -89,54 +89,22 @@
 			}
 		},
 		mounted() {
-            const userId = localStorage.getItem('userId');
-            axios.get('http://localhost:3000/api/user/' + userId, {
+            axios.get('http://localhost:3000/api/auth/profil/', {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             })
             .then(response => {
-                this.user = response.data;
-                console.log(response.data)
+                this.user = response.data.user;
+                console.log(response.data.user)
             })
             .catch(() => {this.messError = 'Une erreur c\'est produite'})  
 		},
 		methods: {
-            //modifier profil
-            onFileSelected(event) {
-                this.avatar = event.target.files[0];
-                this.imagePreview = URL.createObjectURL(this.avatar);
-            },
-			modifyProfil() {
-				const userId = localStorage.getItem('userId');
-				const formData = new FormData();
-                if (this.avatar) {
-                    formData.append("image", this.avatar);
-                }
-				if (this.user.description) {
-                    formData.append("description", this.user.description);
-                }
-                if (this.password) {
-                    formData.append("password", this.password);
-                }
-				axios.put('http://localhost:3000/api/user/' + userId, formData, {
-					headers: {
-						'Authorization': 'Bearer ' + localStorage.getItem('token'),
-						'Content-Type': 'multipart/form-data'
-					}
-				})
-                .then(() => {
-                    this.messReussite = 'Profile modifié';
-                    localStorage.removeItem('avatar');  
-                    localStorage.setItem('avatar', this.avatar);                    
-                    window.location.reload();
-                })
-                .catch(() => {this.messError = 'Une erreur s\'est produite'})
-			},
+  
             //suprimer user
 			deleteUser(){
-                const userId = localStorage.getItem('userId');
-                axios.delete('http://localhost:3000/api/user/' + userId, {
+                axios.delete('http://localhost:3000/api/auth/profil' , {
                     headers: {
                         'Content-Type' : 'application/json',
                         'Authorization': 'Bearer ' + localStorage.getItem('token')

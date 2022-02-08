@@ -3,6 +3,7 @@ const express = require('express'); // importation d'express
 const app = express(); // création de l'app
 app.use(express.json()); // acces au corp de la requête
 const bodyparser = require('body-parser');
+const cors = require('cors');
 app.use(bodyparser.urlencoded({
   extended : true
 }))
@@ -17,6 +18,7 @@ app.use(bodyparser.urlencoded({
 
   // autoriser les utilisateurs , ERROR CORS (Cross origin ressource sharing) systeme de sécurité qui par defaut bloque les appels http entre serv différents
   // du coup on doit utilisé des headers pour communiqué avec elle 
+  app.use(cors())
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');

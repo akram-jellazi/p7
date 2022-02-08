@@ -47,4 +47,28 @@ exports.login = (req, res, next) => {
                 });
             })
     }) 
+    
+
   };
+  exports.getProfil = (req, res, next) => {
+    let user = User.findOne({ id: res.locals.userId }) 
+    .then(user => {
+        console.log(user)
+        if (!user) {
+            return res.status(401).json({ error: 'Utilisateur non trouvé' });
+        }
+        return res.status(200).json({user})
+ 
+    }) 
+};
+exports.deleteProfil = (req, res, next) => {
+    let user = User.deleteAccount({ id: res.locals.userId }) 
+    .then(user => {
+        console.log(user)
+        if (!user) {
+            return res.status(401).json({ error: 'Utilisateur non trouvé' });
+        }
+        return res.status(200).json({user})
+ 
+    }) 
+};

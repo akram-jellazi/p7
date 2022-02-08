@@ -79,9 +79,10 @@
                 formData.append("image", this.imageURL);
                 formData.append("positId",this.postId);
 
-        fetch(`http://localhost:3000/api/post/`,formData,
+        fetch(`http://localhost:3000/api/post/`+ this.post.id,
             {
                     method:'PUT',
+                    body : formData,
                     headers: {
                         'Authorization': 'bearer '+ localStorage.getItem('token')
                             },}) 
