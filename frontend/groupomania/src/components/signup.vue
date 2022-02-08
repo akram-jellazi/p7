@@ -1,10 +1,10 @@
 <template>
             <form @submit.prevent="signup" class="signup">
                 <h2 class="signup-titre">S'inscrire</h2>
-                <label for="lastName" class="signup-nom">Prénom</label>
-                <input type="text" v-model="lastName" id="lastName" name="lastName" placeholder="Nom">
-                <label for="firstName" class="signup-prenom">Nom</label>
-                <input type="text" v-model="firstName" id="firstName" name="firstName" placeholder="Prenom">
+                <label for="nom" class="signup-nom">Prénom</label>
+                <input type="text" v-model="nom" id="nom" name="nom" placeholder="Nom">
+                <label for="prenom" class="signup-prenom">Nom</label>
+                <input type="text" v-model="prenom" id="prenom" name="prenom" placeholder="Prenom">
                 <label for="mail" class="signup-email">Courriel</label>
                 <input type="email" v-model="signupemail" id="signupemail" name="mail" placeholder="votre_email@groupomania.com">
                 <label for="password" class="signup-mdp">Mot de passe</label>
@@ -19,22 +19,22 @@ export default {
 
         data() {
           return {
-            lastName: '',
-            firstName:'',
+            nom: '',
+            prenom:'',
             signupemail:'',
             signupmdp:''
           }
         },
         methods:{
           Signup() {
-            fetch('localhost:3000/api/auth/signup', {
+            fetch('http://localhost:3000/api/auth/signup', {
               method:'POST',
               headers: {
                   'Content-Type': 'application/json'
                       },
               body: JSON.stringify({
-                firstName: this.firstName,
-                lastName: this.lastName,
+                nom: this.nom,
+                prenom: this.prenom,
                 email : this.signupemail,
                 password: this.signupmdp
               })

@@ -5,7 +5,7 @@ const mysql = require('mysql');
  const User = require('../models/user');
 
 
-
+// inscription
 exports.signup = async (req, res, next) => {
 
         console.log(req.body)
@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
                 })
             };
       
-
+// connection
 exports.login = (req, res, next) => {
     let user = User.findOne({ email: req.body.email }) 
     .then(user => {
@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
             })
     }) 
     
-
+// Afficher le profil
   };
   exports.getProfil = (req, res, next) => {
     let user = User.findOne({ id: res.locals.userId }) 
@@ -61,6 +61,7 @@ exports.login = (req, res, next) => {
  
     }) 
 };
+// Supprimé le profil
 exports.deleteProfil = (req, res, next) => {
     let user = User.deleteAccount({ id: res.locals.userId }) 
     .then(user => {
