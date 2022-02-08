@@ -40,8 +40,7 @@
         },
         methods: {
             // supprimer un commentaire
-            deleteCommentaires(commentId) {    
-                console.log('commentaire',this.commentaire)      
+            deleteCommentaires(commentId) {       
                 axios.delete('http://localhost:3000/api/commentaires/' + commentId, {
                     headers: {
                         'Content-Type' : 'application/json',

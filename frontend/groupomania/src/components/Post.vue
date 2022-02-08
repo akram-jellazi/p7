@@ -1,4 +1,5 @@
 <template>
+            
 <div>
                     <div class="author" >                        
                         <img v-if="post.avatar" :src="post.User.avatar" :alt="'avatar de' + post.User.lastName + post.User.firstName" class="avatar"/>
@@ -7,16 +8,7 @@
                         <span> {{post.nom}} {{post.prenom}} </span>
                     </div>
 
-                    <!-- <div  class="contenu">
-                        <p>{{post.text}}</p>
-                        <img :src="post.imageURL" style="max-width: 100%" />
-                    </div>  -->
-                     <!-- <div v-if="post.userId == userId">
-                        <button>UPDATE </button>
-                        <button>DELETE </button>
-                    </div> -->
-
-                    <!-- test -->
+                    
                     <div v-if="modifId != 'modifSection-' + post.id" class="contenu">
                         <p>{{post.text}}</p>
                         <img :src="post.imageURL" style="max-width: 100%" />
@@ -25,7 +17,7 @@
                     <form :postId="post.id" v-if="modifId == 'modifSection-' + post.id" v-on:submit.prevent="modifyPost(post)">
                         <textarea v-model="post.text" class="" name="message" id="message"/>    
                         <img v-if="imagePreview" :src="imagePreview" id="preview" class=""/>     
-                        <input type="file" @change="onFileSelected" accept="images/*">       
+                        <input type="file" @change="onFileSelected" accept="images/*">   <!-- image?-->    
                         <button type="submit">Publier</button>
                     </form>
                     </div> 
@@ -34,7 +26,7 @@
                         <button v-if="userId == post.userId" v-on:click="modifPostBouton('modifSection-' + post.id)">Modifier</button>
                         <button v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
                     </div>   
-                    <!--test -->
+                   
                     <Commentaire :post="post" :commentaires="commentaires" />
                     <writingComm :postId="post.id" />
 </div>
@@ -50,7 +42,7 @@
         name: 'Post',
         components: {
             Commentaire,
-            writingComm
+            writingComm, 
         },
         
         props: ['post','commentaire'],
@@ -142,3 +134,5 @@
   }
     }
 </script>
+
+
