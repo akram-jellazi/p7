@@ -1,5 +1,5 @@
 <template>
-            <form @submit.prevent="signup" class="signup">
+            <form @submit.prevent="Signup" class="signup">
                 <h2 class="signup-titre">S'inscrire</h2>
                 <label for="nom" class="signup-nom">Prénom</label>
                 <input type="text" v-model="nom" id="nom" name="nom" placeholder="Nom">
@@ -27,6 +27,7 @@ export default {
         },
         methods:{
           Signup() {
+            
             fetch('http://localhost:3000/api/auth/signup', {
               method:'POST',
               headers: {

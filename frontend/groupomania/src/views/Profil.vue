@@ -21,8 +21,8 @@
                         <span>Courriel : {{ user.email }}</span><br>
                         <span>Mot de passe : **********</span><br>
                         <span>Status : {{ user.status }}</span><br>
-                        <span class="pc">Création du compte : {{user.createdAt}}</span><br>
-                        <span class="pc">Derniére connection : {{user.lastRefreshDate}}</span>
+                        <span class="pc">Création du compte : {{dateFormat(user.createdAt)}}</span><br>
+                        <span class="pc">Derniére connection : {{dateFormat(user.lastRefreshDate)}}</span>
                     </div>
                 </div>
                 <div class="bouton">
@@ -39,8 +39,8 @@
 
                 <div class="bas">
                     <div class="date mobil">
-                        <span>Création du compte : {{user.createdAt}}</span><br>
-                        <span>Derniére connection : {{user.lastRefreshDate}}</span>
+                        <span>Création du compte : {{dateFormat(user.createdAt)}}</span><br>
+                        <span>Derniére connection : {{dateFormat(user.lastRefreshDate)}}</span>
                     </div>
                     <button v-on:click="logout" class="mobil logout"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
