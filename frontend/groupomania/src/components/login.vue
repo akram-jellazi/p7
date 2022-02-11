@@ -59,6 +59,7 @@ console.log('test', this.loginemail, this.loginmdp);
 
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('userId', response.userId);
+                    localStorage.setItem('status', response.status);
                    /* localStorage.setItem('lastName', response.data.lastName);
                     localStorage.setItem('firstName', response.data.firstName);
                     localStorage.setItem('avatar', response.data.avatar);*/

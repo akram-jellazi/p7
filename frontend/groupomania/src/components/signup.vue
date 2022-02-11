@@ -40,9 +40,8 @@ export default {
                 password: this.signupmdp
               })
             })
-            .then(response => {
-                localStorage.setItem('token', response.token)
-                window.location.href = 'wall'
+            .then(() => {
+                window.location.reload() 
             })
           }
         }

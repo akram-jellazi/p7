@@ -38,6 +38,7 @@ exports.login = (req, res, next) => {
 
                 res.status(200).json({
                     userId: user.id,
+                    status: user.status,
                     token: jwt.sign(//nouveau token
                         { userId: user.id,          
                           status : user.status }, //contient ID encodées dans le token
@@ -63,7 +64,7 @@ exports.login = (req, res, next) => {
 };
 // Supprimé le profil
 exports.deleteProfil = (req, res, next) => {
-    let user = User.deleteAccount({ id: res.locals.userId }) 
+    let user = User.deleteAccount( res.locals.userId ) 
     .then(user => {
         console.log(user)
         if (!user) {

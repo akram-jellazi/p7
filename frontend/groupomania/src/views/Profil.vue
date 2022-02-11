@@ -110,7 +110,7 @@
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-				.then(() => {this.messReussite = 'Vous avez supprimer votre compte',
+				.then(() => {this.messReussite = 'Vous avez supprimer votre compte'
 					localStorage.clear();
                     this.$router.push('/');})
                 .catch(() => {this.messError = 'Une erreur c\'est produite'})
