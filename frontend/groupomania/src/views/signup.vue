@@ -51,7 +51,7 @@ export default {
         }
         img
         {
-            width: 90%;
+            width: 30%;
             margin-bottom: 5%;
         }
     }
@@ -77,7 +77,7 @@ export default {
         border: solid 3px #D1515A;
         border-radius: 30px;
         padding: 5%;
-        width: 120%;
+        // width: 120%;
         h2 
         {
             color: #134aa7;
@@ -95,11 +95,11 @@ export default {
     }
     @media (min-width: 992px)
     {
-        .formulaire
-        {
-            flex-direction: row;
-            align-items: baseline;
-        }            
+        // .formulaire
+        // {
+        //     flex-direction: row;
+        //     align-items: baseline;
+        // }            
         form 
         {
             width: 300px;

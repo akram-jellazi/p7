@@ -1,8 +1,8 @@
 <template>
     <div>
         <section class="profil" >
-        <router-link to="/wall" v-if="!showModifierElement"><i class="fas fa-arrow-circle-left"></i></router-link>
-        <button v-on:click="togglewModifierElement" v-if="showModifierElement" class="boutonRetour"><i class="fas fa-arrow-circle-left"></i></button>
+        <router-link to="/wall"><i class="fas fa-arrow-circle-left"></i></router-link>
+        
         <button v-on:click="logout" class="pc logout">Déconnexion</button>
             <!--profil-->
             <div class="entete">
@@ -11,18 +11,17 @@
                 <h2>{{user.nom}} {{user.prenom}}</h2>
             </div>
 
-            <div v-if="!showModifierElement">
+            <div>
                 <div class="descrinfo">
-                    <p v-if="user.description == null">Vous n'avez pas encore de description</p>
-                    <p v-if="user.description != null">{{user.description}}</p>
+                    <!-- <p v-if="user.description == null">Vous n'avez pas encore de description</p>
+                    <p v-if="user.description != null">{{user.description}}</p> -->
 
                     <div class="infoUser">
                         <h3>Mes infos personnelles</h3>
                         <span>Courriel : {{ user.email }}</span><br>
                         <span>Mot de passe : **********</span><br>
-                        <span>Status : {{ user.status }}</span><br>
+                        <span>Status : {{ user.status === 1 ? 'Admin': 'Utilisateur' }}</span><br>
                         <span class="pc">Création du compte : {{dateFormat(user.createdAt)}}</span><br>
-                        <span class="pc">Derniére connection : {{dateFormat(user.lastRefreshDate)}}</span>
                     </div>
                 </div>
                 <div class="bouton">
@@ -40,24 +39,11 @@
                 <div class="bas">
                     <div class="date mobil">
                         <span>Création du compte : {{dateFormat(user.createdAt)}}</span><br>
-                        <span>Derniére connection : {{dateFormat(user.lastRefreshDate)}}</span>
                     </div>
                     <button v-on:click="logout" class="mobil logout"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
         </section>
-
-        <!--formulaire-->
-        <form v-if="showModifierElement">
-            <label>Avatar</label>
-            <img v-if="imagePreview" :src="imagePreview" class="preview"/>
-            <input type="file" v-on:change="onFileSelected" accept="image/*"> <!-- image? -->
-            <label>Description</label>
-            <textarea v-model="user.description" type="text" class="description" placeholder="Taper votre description ici" />
-            <label>Mot de passe</label>
-            <input v-model="password" type="password" autocomplete="current-password" placeholder="**********"/>
-            <button v-on:click="modifyProfil" type="button">Valider</button>
-        </form>
 
         <span>{{messError}}</span>
 		<span>{{messReussite}}</span>
@@ -89,16 +75,26 @@
 			}
 		},
 		mounted() {
-            axios.get('http://localhost:3000/api/auth/profil/', {
+            fetch('http://localhost:3000/api/auth/profil/', {
+                method:'GET',
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             })
+            .then(res => res.json())
             .then(response => {
-                this.user = response.data.user;
-                console.log(response.data.user)
+                if (response.status === 401) {
+
+                window.location = '/signup';
+
+                return;
+                }
+
+                this.user = response.user;                
             })
-            .catch(() => {this.messError = 'Une erreur c\'est produite'})  
+            .catch((response) => {
+                console.log(response);
+                this.messError = 'Une erreur c\'est produite'})  
 		},
 		methods: {
   
@@ -119,16 +115,14 @@
             logout() {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userId');
-                localStorage.removeItem('lastName');
-                localStorage.removeItem('firstName');
+                localStorage.removeItem('nom');
+                localStorage.removeItem('prenom');
                 localStorage.removeItem('avatar');
                 localStorage.removeItem('status');
                 this.$router.push('/');
             },
             //bouton
-			togglewModifierElement(){
-				this.showModifierElement = !this.showModifierElement
-            },			
+		
             boutonSupprimer(){
 				this.voirSupprimer = !this.voirSupprimer
             },
@@ -165,7 +159,7 @@
     .entete
     {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         margin-top: 5%;
         .fa-user-astronaut
@@ -191,6 +185,7 @@
         {
             color: #D1515A;
             font-size: 2em;
+            margin-left: 5%;
         }
     }
     p
@@ -218,7 +213,7 @@
         button
         {
             width: 40%;
-            font-size: 1.5em;
+            font-size: 1rem;
             margin-top: 5%;
         }
     }
@@ -293,13 +288,13 @@ form
             top: 0.5%;
             border-radius: 0;
             box-shadow: none;
-            width: 10%;
+            width: 14%;
             color: #091F43;
             margin-top: 0%;
         }
         .entete
         {
-            justify-content: flex-start;
+            justify-content: center;
             h2
             {
                 margin-left: 5%;

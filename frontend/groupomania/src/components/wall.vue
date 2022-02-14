@@ -24,11 +24,22 @@ export default {
               method:'GET',
               headers: {
                   'Authorization': 'bearer '+ localStorage.getItem('token')
-                      },}) 
-      .then ( res => (res.json()))
+                      },})
+
+      .then ( res => {
+
+if (res.status === 401) {
+
+  window.location = '/signup';
+
+  return;
+}
+
+        return res.json()})
       .then (res => {
         this.Posts = res
       })
+
   }
 };
 </script>

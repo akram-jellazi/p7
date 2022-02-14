@@ -2,9 +2,9 @@
             
 <div>
                     <div class="author" >                        
-                        <img v-if="post.avatar" :src="post.User.avatar" :alt="'avatar de' + post.User.lastName + post.User.firstName" class="avatar"/>
+                        <img v-if="post.avatar" :src="post.User.avatar" :alt="'avatar de' + post.User.nom + post.User.prenom" class="avatar"/>
                         <i v-if="post.avatar == null || post.User.avatar == ''" class="fa fa-user-astronaut"></i>
-
+    
                         <span> {{post.nom}} {{post.prenom}} </span>
                     </div>
 
@@ -14,21 +14,21 @@
                         <img :src="post.imageURL" style="max-width: 100%" />
                     </div>
                     <div>
-                    <form :postId="post.id" v-if="modifId == 'modifSection-' + post.id" v-on:submit.prevent="modifyPost(post)">
+                    <form class="form" :postId="post.id" v-if="modifId == 'modifSection-' + post.id" v-on:submit.prevent="modifyPost(post)">
                         <textarea v-model="post.text" class="" name="message" id="message"/>    
                         <img v-if="imagePreview" :src="imagePreview" id="preview" class=""/>     
                         <input type="file" @change="onFileSelected" accept="images/*">   <!-- image?-->    
-                        <button type="submit">Publier</button>
+                        <button class="publish" type="submit">Publier</button>
                     </form>
                     </div> 
                     <!-- Bouttons  -->
                       <div v-if=" modifId != 'modifSection-'" class="author-boutons"  >
-                        <button v-if="userId == post.userId" v-on:click="modifPostBouton('modifSection-' + post.id)">Modifier</button>
-                        <button v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
+                        <button class="button" v-if="userId == post.userId" v-on:click="modifPostBouton('modifSection-' + post.id)">Modifier</button>
+                        <button class="button" v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
                     </div>   
                    
-                    <Commentaire :post="post" :commentaires="commentaires" />
-                    <writingComm :postId="post.id" />
+                    <Commentaire :post="post" :commentaires="commentaires" /> <!-- ?? -->
+                    <writingComm :postId="post.id" />                         <!-- ?? -->  
 </div>
 </template>
 
@@ -57,11 +57,7 @@
                 imageURL: '',
                 imagePreview:'',
                  //bouton
-                boutonVoir: false,
-                filter: 'all',
-                replyFormId: '',
-                commentSectionId: '',
-                likeFormId: '',
+                // boutonVoir: false,
                 modifId: '',
             }
         },
@@ -89,6 +85,8 @@
             .then ( res => (res.json()))
             .then (res => {
                 this.commentaires = res
+
+                location.reload();
             })
         },
         // supprimer post
@@ -103,7 +101,7 @@
                 .then(() => {window.location.reload()})
                 .catch(() => {this.messError = 'Une erreur s\'est produite'})
             },
-         //bouton
+         //bouton ??
 			modifPostBouton(postModifSection){
 				
                 if (this.modifId == postModifSection) {
@@ -112,14 +110,9 @@
                     this.modifId = postModifSection
                 }
             },            
-            repondre(replyFormId) {
-                this.replyFormId = replyFormId
-            },
-            applyFilter(filter) {
-                this.filter = filter    
-            },
 
         },
+        // ??
          mounted : function () {
               
       fetch(`http://localhost:3000/api/commentaires?postId= ${this.post.id} &sortName=CreatedAt`,
@@ -135,5 +128,13 @@
   }
     }
 </script>
+<style scoped lang="scss">
+.author-boutons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
+</style>
 

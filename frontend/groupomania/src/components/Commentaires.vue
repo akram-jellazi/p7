@@ -12,7 +12,7 @@
 
                 <span class="date">Publié le {{ commentaire.createdAt }}</span>
 
-                <div class="author-boutons" v-if="userId == commentaire.userId || statut == 'admin'">
+                <div class="author-boutons" v-if="userId == commentaire.userId || status == 1">
                     <button v-on:click="deleteCommentaires(commentaire.id)">Supprimer</button>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             return {
                 //identification
                 userId: localStorage.getItem('userId'),
-                statut: localStorage.getItem('statut'),
+                status: localStorage.getItem('status'), 
             }
         },
         methods: {

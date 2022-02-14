@@ -34,10 +34,8 @@
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
-                })
-                console.log('postId',this.postId)       //CONSOLE LOG  // 
-                console.log('text',this.text)            //CONSOLE LOG   //     
-                // .then(() => {window.location.reload()})
+                })  
+                 .then(() => {window.location.reload()})
 
                 .catch(() => {this.messError = 'Une erreur c\'est produite'})
             },

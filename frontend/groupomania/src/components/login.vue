@@ -40,7 +40,6 @@ export default {
             //Se connecter
             login() {
 
-console.log('test', this.loginemail, this.loginmdp);
 
                 fetch('http://localhost:3000/api/auth/login', {
                 method:'POST',
@@ -60,9 +59,8 @@ console.log('test', this.loginemail, this.loginmdp);
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('userId', response.userId);
                     localStorage.setItem('status', response.status);
-                   /* localStorage.setItem('lastName', response.data.lastName);
-                    localStorage.setItem('firstName', response.data.firstName);
-                    localStorage.setItem('avatar', response.data.avatar);*/
+
+                    // localStorage.setItem('avatar', response.data.avatar);
                     
                     router.push('/wall')
                 })

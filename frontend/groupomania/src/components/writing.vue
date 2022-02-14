@@ -4,7 +4,7 @@
             <textarea v-model="text" class="" name="message" id="message" placeholder="Créer votre post "/>    
             <img v-if="imagePreview" :src="imagePreview" id="preview" class=""/>     
             <input type="file" @change="onFileSelected" accept="image/*">       
-            <button type="submit">Publier</button>
+            <button class="publish" type="submit">Publier</button>
         </form>
         <span>{{messError}}</span>
     </div>
@@ -67,6 +67,7 @@
             {
                 width: 98%;
                 height: 150px;
+                margin-bottom: 1rem;
             }
             img
             {
@@ -77,6 +78,7 @@
                 font-size: 1.5em;
                 margin-left: 25%;
             }
+
         }
     }    
         @media (min-width: 992px)

@@ -37,7 +37,7 @@ User.create = user => {
 };
 User.findOne = user => {
     const INSERT = [Object.keys(user), Object.values(user)]
-    const query = db.format('SELECT id, email,nom,prenom,password,status FROM utilisateur WHERE ??=?',INSERT)
+    const query = db.format('SELECT id, email,nom,prenom,password,status, createdAt, updatedAt FROM utilisateur WHERE ??=?',INSERT)
     return new Promise((resolve,reject)=> {
         db.query(query, function (error, results, fields) {
             if (error) throw error;

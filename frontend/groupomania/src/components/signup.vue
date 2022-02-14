@@ -1,5 +1,5 @@
 <template>
-            <form @submit.prevent="Signup" class="signup">
+            <form @submit.prevent="Signup" class="signup"> <!-- submit.prevent empeche de recharge la page --> 
                 <h2 class="signup-titre">S'inscrire</h2>
                 <label for="nom" class="signup-nom">Prénom</label>
                 <input type="text" v-model="nom" id="nom" name="nom" placeholder="Nom">
