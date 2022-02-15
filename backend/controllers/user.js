@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');//application token
 const bcrypt = require('bcrypt'); //application bcrypt
 const mysql = require('mysql');
-
+require('dotenv').config()
  const User = require('../models/user');
 
 
@@ -42,7 +42,7 @@ exports.login = (req, res, next) => {
                     token: jwt.sign(//nouveau token
                         { userId: user.id,          
                           status : user.status }, //contient ID encodées dans le token
-                        'RANDOM_TOKEN_SECRET',// encoder avec la clef "RANDOM_TOKEN_SECRET"
+                        process.env.TOKEN,// encoder avec la clef "RANDOM_TOKEN_SECRET"
                         { expiresIn: '24h' }//durée de validité
                     )
                 });

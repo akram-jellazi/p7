@@ -60,41 +60,9 @@ Commentaires.findAllbypost = payload => {
     });
 })}
 
-Commentaires.findAll = payload => {
-    const { order, include } = payload;
-    const sortFieldName = order[0][0];
-    const sortDirection = order[0][1];
-
-    const query = db.format(`SELECT * FROM commentaires ORDER BY ?? ${sortDirection === "ASC" ?  "ASC"  :  'DESC'}`, [sortFieldName] )
-
-    return new Promise((resolve,reject)=> {
-        db.query(query, function (error, commentaires, fields) {
-            if (error) throw error;
-            
-            const promises = commentaires.map(commentaire => {
-                const userId = commentaire.userId;
-
-                return include.model.findOne({ id: userId })})
-
-            Promise
-                .all(promises)
-                .then(users => {
-                    const  results = commentaires.map((commentaire, index) => {
-                        const user = users[index];
-
-                        if (!user) {
-                            throw new Error(`User with userId ${commentaire.userId} is not found `)
-                        }
-
-                        return {...commentaire, nom: user.nom, prenom: user.prenom, avatar: user.avatar }
-                    });
-                    resolve(results)
-                })
-    });
-})}
 
 // DELETE
-// Suppression de l'user
+// Suppression 
 Commentaires.delete = payload => {
     
     const query = db.format('DELETE FROM commentaires WHERE id = ? ',[payload.where.id])

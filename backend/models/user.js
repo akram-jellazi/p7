@@ -1,18 +1,3 @@
-// const mongoose = require('mongoose');
-// const mongooseErrors = require('mongoose-errors')
-// // on restreint les utilisateurs a utilisés la même adresse email
-// const uniqueValidator = require('mongoose-unique-validator'); 
-
-// const userSchema = mongoose.Schema({
-//     email: { type: String, required: true, unique: true },
-//     password: { type: String, required: true }
-// });
-
-// userSchema.plugin(uniqueValidator);
-// userSchema.plugin(mongooseErrors);
-
-// // schéma modele
-// module.exports = mongoose.model('User', userSchema);
 
 const db = require('../cfg/mysql')
 

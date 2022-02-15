@@ -26,10 +26,10 @@ app.use((req, res, next) => {
   next();
 });
 
-const postRoutes = require('./routes/post'); // importation des routes des sauces
+const postRoutes = require('./routes/post'); // importation des routes post
 app.use('/api/post', postRoutes);
 
-const commentRoutes = require('./routes/commentaires'); // importation des routes des sauces
+const commentRoutes = require('./routes/commentaires'); // importation des routes commentaires
 app.use('/api/commentaires', commentRoutes);
 
 const path = require('path'); // acceder au path(chemin) de notre serveur

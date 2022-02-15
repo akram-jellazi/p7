@@ -24,7 +24,7 @@ exports.createPost = (req, res, next) => {
 };
 
 //GET
-// Voir tout les message
+// Voir tout les messages
 exports.getAllPosts = (req, res, next) => {
 
     Posts.findAll({        

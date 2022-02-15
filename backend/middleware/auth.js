@@ -1,9 +1,9 @@
 const jwt =require('jsonwebtoken'); //decryptage token
-
+require('dotenv').config()          // TOKEN dans le env
 module.exports = (req,res,next) => {
 try {
 const token = req.headers.authorization.split(' ')[1]; // récupération
-const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET'); //décodage
+const decodedToken = jwt.verify(token, process.env.TOKEN); //décodage
 
 console.log(decodedToken);
 

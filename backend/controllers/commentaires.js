@@ -31,8 +31,7 @@ exports.findAllbypost = (req, res, next) => {
         where: { postId: req.query.postId },
         include: {
             model: User,
-          //  attributes: [ 'lastName', 'firstName', 'avatar' ],
-          //  as: "User"
+
         }
     })
     .then(commentaireFound => {
@@ -44,26 +43,6 @@ exports.findAllbypost = (req, res, next) => {
     });
 }
 
-//GET
-// Voir les commentaires
-// exports.getAllCommentaires = (req, res, next) => {
-//     Commentaires.findAll({
-//         order: [['updatedAt', "ASC"]],
-//         where: { postId: req.params.postId },
-//         include: {
-//             model: User,
-//           //  attributes: [ 'lastName', 'firstName', 'avatar' ],
-//           //  as: "User"
-//         }
-//     })
-//     .then(commentaireFound => {
-//             res.status(200).json(commentaireFound);
-//     })
-//     .catch(error => {
-//         console.log(error)
-//         res.status(500).send({ error: 'Recherche du commentaire échoué' });
-//     });
-// }
 
 //DELETE
 // Supprimer un commentaire
