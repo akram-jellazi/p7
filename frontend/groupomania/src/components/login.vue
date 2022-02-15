@@ -54,13 +54,11 @@ export default {
                 .then(res => res.json())
                 .then(response => {
 
-                    console.log(response);
+
 
                     localStorage.setItem('token', response.token);
                     localStorage.setItem('userId', response.userId);
                     localStorage.setItem('status', response.status);
-
-                    // localStorage.setItem('avatar', response.data.avatar);
                     
                     router.push('/wall')
                 })
