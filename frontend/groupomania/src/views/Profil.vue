@@ -81,8 +81,8 @@
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                 }
             })
-            .then(res => res.json())
             .then(response => {
+
                 if (response.status === 401) {
 
                 window.location = '/signup';
@@ -90,6 +90,8 @@
                 return;
                 }
 
+                return response.json()})
+            .then(response => {
                 this.user = response.user;                
             })
             .catch((response) => {

@@ -8,12 +8,6 @@ app.use(bodyparser.urlencoded({
   extended : true
 }))
 
-// // Connection a mongoDB
-// mongoose.connect('mongodb+srv://chougoulat:jougoulat123@cluster0.viwjb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-//   { useNewUrlParser: true,
-//     useUnifiedTopology: true })
-//   .then(() => console.log('Connexion à MongoDB réussie !'))
-//   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 
   // autoriser les utilisateurs , ERROR CORS (Cross origin ressource sharing) systeme de sécurité qui par defaut bloque les appels http entre serv différents

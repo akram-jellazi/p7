@@ -27,8 +27,8 @@
                         <button class="button" v-if="userId == post.userId || status == 1" v-on:click="deletePost(post.id)">Supprimer</button>
                     </div>   
                    
-                    <Commentaire :post="post" :commentaires="commentaires" /> <!-- ?? -->
-                    <writingComm :postId="post.id" />                         <!-- ?? -->  
+                    <Commentaire :post="post" :commentaires="commentaires" /> 
+                    <writingComm :postId="post.id" />                         
 </div>
 </template>
 

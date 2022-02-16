@@ -1,11 +1,11 @@
 # Pour installer les projets allez dans le back :
 
-npm install
+npm install ensuite
 nodemon server
 
 # Pour installer les projets allez dans le front :
 
-npm install
+npm install ensuite
 npm run serve
 
 # Pour les variables d'environnements : 
